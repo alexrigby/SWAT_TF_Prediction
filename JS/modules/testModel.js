@@ -3,7 +3,7 @@
 // USES TFVIS TO RENDER A SCATERPLOT WITH PREDICTED AND ORIGIONAL VALUES
 
 
-import { getPredictionInput } from "./getData.js";
+import { getData } from "./getData.js";
 import { convertPredictionInputToTensor } from "./converPredictionInputToTensor.js";
 
 
@@ -11,8 +11,13 @@ import { convertPredictionInputToTensor } from "./converPredictionInputToTensor.
 export async function testModel(model, inputData, normalizationData) {
     //gets the label max and min values to un-normalise predictions
     const { labelMin, labelMax } = normalizationData;
+
+    const inputOption = document.getElementById("inputNames").value
+    const outputOption = document.getElementById("outputNames").value
     //gets observed flow data 
-    const predictionInputData = await getPredictionInput()
+    // const predictionInputData = await getPredictionInput()
+    const predictionInputData = await getData('data/basin_wb_day.csv', inputOption)
+    
     //converts to tensor
     const tensorPredictedInputData = convertPredictionInputToTensor(predictionInputData)
 
@@ -41,14 +46,12 @@ export async function testModel(model, inputData, normalizationData) {
     const predictedPoints = Array.from(unNormPredictionInput).map((val, i) => {
         return { x: val, y: preds[i] }
     });
-    console.log(predictedPoints)
 
-    const inputOption = document.getElementById("outputNames").value
 
     //creates array from origial examples and output and assignes to x and y axis
-    const originalPoints = inputData.map((d, i) => {
-        return { x: d[inputOption], y: d.flow }
-    });
+    const originalPoints = inputData.map(d => ({
+         x: d.x, y: d.y 
+    }));
 
 
     //renders scatterplot with both arrayes plotted
@@ -57,7 +60,7 @@ export async function testModel(model, inputData, normalizationData) {
         { values: [originalPoints, predictedPoints], series: ['original', 'predicted'] },
         {
             xLabel: `${inputOption}`,
-            yLabel: 'flow' ,
+            yLabel: `${outputOption}` ,
             height: 300,
             width: 1000,
             seriesColors: ["red", "blue"]
@@ -99,7 +102,7 @@ export async function testModel(model, inputData, normalizationData) {
 
     //adds the index and the training output data to an array to be plotted
     const trainingVsIndexArray = inputData.map((d, i) => {
-        return { x: d.index, y: training[i] }
+        return { x: d.i, y: training[i] }
     }).sort((a, b) => a.x - b.x);
 
     //render line chart with both predicted and training output data on it
@@ -108,7 +111,7 @@ export async function testModel(model, inputData, normalizationData) {
         { values: [predictedVsIndexArray, trainingVsIndexArray], series: ["predicted", "training"], styles: { color: ["rgba(255, 0, 0, 0.5)", "rgba(0, 0, 255, 0.5)"] } },
         {
             xLabel: 'index',
-            yLabel: `${inputOption}`,
+            yLabel: `${outputOption}`,
             height: 300,
             width: 1000,
         }
@@ -132,7 +135,7 @@ export async function testModel(model, inputData, normalizationData) {
 
     //plots the difference between the predicted and training
     tfvis.render.linechart(
-        { name: 'training data - predicted data', styles: { width: 1000 } },
+        { name: 'predicted data - training data', styles: { width: 1000 } },
         { values: [differenceArray] },
         {
             xLable: 'index',

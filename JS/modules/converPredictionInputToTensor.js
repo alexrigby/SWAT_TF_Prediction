@@ -4,7 +4,7 @@ export function convertPredictionInputToTensor(data) {
 
     // Wrapping these calculations in a tidy will dispose any
     // intermediate tensors.
-    const inputOption = document.getElementById("outputNames").value
+    const inputOption = document.getElementById("inputNames").value
     return tf.tidy(() => {
         // Step 1. Shuffle the data
         // shuffles all data so it is not in the order it was input, 

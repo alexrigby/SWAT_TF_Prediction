@@ -1,10 +1,11 @@
 import { run } from "./modules/run.js";
-import {getData, getOutputNames } from "./modules/getData.js"
+import {getData, getOptionNames } from "./modules/getData.js"
 
-await getOutputNames()
+await getOptionNames('data/basin_wb_day.csv', "inputNames")
+await getOptionNames('data/channel_sd_day.csv', "outputNames")
 
 // document.addEventListener('DOMContentLoaded', await getData());
-document.getElementById("outputNames").addEventListener("change", () => {
+document.getElementById("run").addEventListener("click", () => {
    
     run()
 })

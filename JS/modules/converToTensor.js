@@ -4,7 +4,8 @@
 export function convertToTensor(data) {
     // Wrapping these calculations in a tidy will dispose any
     // intermediate tensors.
-    const inputOption = document.getElementById("outputNames").value
+    const inputOption = document.getElementById("inputNames").value
+    const outputOption = document.getElementById("outputNames").value
     return tf.tidy(() => {
         // Step 1. Shuffle the data
         // shuffles all data so it is not in the order it was input, 
@@ -12,11 +13,10 @@ export function convertToTensor(data) {
         tf.util.shuffle(data);
 
         // Step 2. Convert data to Tensor
-        //inputs = example inputs fed to the model
-        const inputs = data.map(d => d[inputOption]);
-        const labels = data.map(d => d.flow)
         
-       
+        //x values are the inputs and y are lables from 'trainingData' (in 'run.js')
+        const inputs = data.map(d => d.x);
+        const labels = data.map(d => d.y)
 
         //tensor has a shape of [number of examples, number of features per example]
         const inputTensor = tf.tensor2d(inputs, [inputs.length, 1]);
