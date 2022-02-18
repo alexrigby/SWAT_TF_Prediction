@@ -26,14 +26,14 @@ export async function getData(url, IOOption) {
 }
 
 
-export async function getOptionNames(url, id) {
-    const data = await fetchData(url);
-    const cleanData = cleanCsvOutput(data)
-    const inputNames = cleanData.outputNames.map((el, i) => {
-        return `<option value=${el}>${el}</option>`;
-    });
-    document.getElementById(id).innerHTML = inputNames
-}
+// export async function getOptionNames(url, id) {
+//     const data = await fetchData(url);
+//     const cleanData = cleanCsvOutput(data)
+//     const inputNames = cleanData.outputNames.map((el, i) => {
+//         return `<option value=${el}>${el}</option>`;
+//     });
+//     document.getElementById(id).innerHTML = inputNames
+// }
 
 
 
@@ -59,5 +59,5 @@ export async function getPredictionInput() {
 export default {
     getData,
     getPredictionInput,
-    getOptionNames,
+    // getOptionNames,
 }

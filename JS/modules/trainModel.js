@@ -14,7 +14,7 @@ export async function trainModel(model, inputs, labels) {
     //number of examples per batch (model fed 32 examples each itteration)
     const batchSize = 32;
     //number of times model looks at entire dataset
-    const epochs = 25;
+    const epochs = 50;
 
     //model.fit is a function to start the training loop
     return await model.fit(inputs, labels, {
