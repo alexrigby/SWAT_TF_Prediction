@@ -13,7 +13,13 @@ document.getElementById("run").addEventListener("click", () => {
 
 
 
+// const a = tf.tensor2d([[1, 2], [3, 4], [11,200]]);
+// console.log('a shape:', a.shape);
+// a.print();
 
+// const b = a.reshape([6, 1]);
+// console.log('b shape:', b.shape);
+// b.print()
 
 
 

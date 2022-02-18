@@ -22,16 +22,16 @@ export async function run() {
         return { x: d[inputOption], y: outputTrainingData[i][outputOption], i: d.index }
     });
     
-
-    tfvis.visor().surface({ name: "SWAT", styles: { width: 1000 } })
+    tfvis.visor().toggleFullScreen()
     // renders a scatterplot of the origional trining data
     tfvis.render.scatterplot(
-        { name: `training data` },
+        { name: `training data`, styles: {width: 1000} },
         { values: [trainingData] },
         {
             xLabel: `${inputOption}`,
-            yLabel: 'Flow',
-            height: 300
+            yLabel: `${outputOption}`,
+            height: 300, 
+            width: 1000,
         }
     );
 

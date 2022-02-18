@@ -23,9 +23,9 @@ export async function trainModel(model, inputs, labels) {
         shuffle: true,
         // callbacks to monitor the training progress, rendered as plot with tfvis
         callbacks: tfvis.show.fitCallbacks(
-            { name: 'Training Performance' },
+            { name: 'Training Performance', styles: {width: 1000} },
             ['loss', 'mse'],
-            { height: 200, callbacks: ['onEpochEnd'] }
+            { height: 200, width: 1000, callbacks: ['onEpochEnd'] }
         )
     });
 }

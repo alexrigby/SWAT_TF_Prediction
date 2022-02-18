@@ -15,6 +15,7 @@ export function convertPredictionInputToTensor(data) {
         //inputs = example inputs fed to the model
         const inputs = data.map(d => d[inputOption])
         
+        
         //tensor has a shape of [number of examples, number of features per example]
         const inputTensor = tf.tensor2d(inputs, [inputs.length, 1]);
 

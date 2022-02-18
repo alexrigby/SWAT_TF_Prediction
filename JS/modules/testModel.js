@@ -14,8 +14,8 @@ export async function testModel(model, inputData, normalizationData) {
 
     const inputOption = document.getElementById("inputNames").value
     const outputOption = document.getElementById("outputNames").value
-    //gets observed flow data 
-    // const predictionInputData = await getPredictionInput()
+   
+    
     const predictionInputData = await getData('data/basin_wb_day.csv', inputOption)
     
     //converts to tensor
