@@ -13,15 +13,18 @@ export function convertToTensor(data) {
         tf.util.shuffle(data);
 
         // Step 2. Convert data to Tensor
-        
+         
+        console.log(data)
         //x values are the inputs and y are lables from 'trainingData' (in 'run.js')
         const inputs = data.map(d => d.x);
-        const labels = data.map(d => d.y)
+        const labels = data.map(d => d.y);
+       
 
         //tensor has a shape of [number of examples, number of features per example]
         const inputTensor = tf.tensor2d(inputs, [inputs.length, 1]);
         const labelTensor = tf.tensor2d(labels, [labels.length, 1]);
-
+        inputTensor.print()
+          
         //Step 3. Normalize the data to the range 0 - 1 using min-max scaling
         const inputMax = inputTensor.max();
         const inputMin = inputTensor.min();
